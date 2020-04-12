@@ -1,3 +1,1 @@
-Playing around with C++ traits.
-
-Reference: <https://www.hackerrank.com/challenges/cpp-class-template-specialization>
+[FUN] A simple bitmap generator for fractals in C++.

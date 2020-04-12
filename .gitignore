@@ -1,5 +1,6 @@
 bin
 obj
+.deps.bak
 
 # Prerequisites
 *.d

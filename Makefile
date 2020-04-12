@@ -1,6 +1,6 @@
 #Compiler and basic compilation flags (like warnings)
 CXX = g++
-CXXFLAGS = -Wall -Wextra
+CXXFLAGS = -Wall -Wextra -std=c++17
 
 #Folder where binary file will reside.
 #Leave blank for current (root) folder
@@ -10,7 +10,7 @@ _BIN = fractal.out
 #Folder where source files reside. Must exist.
 #Leave blank for current (root) folder
 SRC_DIR =
-_SRC = fractal.cc
+_SRC = main.cc Bitmap.cc
 
 #Folder where object files will reside. 
 #Will be created if it doesn't exist.
