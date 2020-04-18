@@ -1,6 +1,8 @@
 bin
 obj
 .deps.bak
+*.bmp
+*.dump
 
 # Prerequisites
 *.d

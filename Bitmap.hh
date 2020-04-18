@@ -9,7 +9,7 @@ namespace BM {
 
 #pragma pack(2)
 struct BitmapFileHeader {
-  char header[2]{'B', 'W'};
+  char header[2]{'B', 'M'};
   int32_t file_size{0};
   int32_t reserved{0};
   int32_t data_offset{0};
@@ -38,13 +38,13 @@ class Bitmap {
   Bitmap(int width_, int height_);
   virtual ~Bitmap();
 
-  void setPixel(int x_, int y_, std::byte red_, std::byte green_, std::byte blue_);
+  void setPixel(int x_, int y_, uint8_t red_, uint8_t green_, uint8_t blue_);
   bool write(const std::string& filename);
 
  private:
   int _width{0};
   int _height{0};
-  std::unique_ptr<std::byte[]> _pixels{nullptr};
+  std::unique_ptr<uint8_t[]> _pixels{nullptr};
   static constexpr size_t ColorCount{3};
 };
 
