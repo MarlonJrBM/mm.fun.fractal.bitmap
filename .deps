@@ -2,3 +2,4 @@
 
 obj/main.o: Bitmap.hh
 obj/Bitmap.o: Bitmap.hh
+obj/Mandelbrot.o: Mandelbrot.hh
