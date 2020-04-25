@@ -10,7 +10,7 @@ _BIN = fractal.out
 #Folder where source files reside. Must exist.
 #Leave blank for current (root) folder
 SRC_DIR =
-_SRC = main.cc Bitmap.cc Mandelbrot.cc
+_SRC = main.cc Bitmap.cc Mandelbrot.cc Zoom.cc FractalCreator.cc
 
 #Folder where object files will reside. 
 #Will be created if it doesn't exist.

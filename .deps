@@ -1,5 +1,7 @@
 # DO NOT DELETE
 
-obj/main.o: Bitmap.hh
+obj/main.o: Bitmap.hh FractalCreator.hh Mandelbrot.hh Zoom.hh
 obj/Bitmap.o: Bitmap.hh
 obj/Mandelbrot.o: Mandelbrot.hh
+obj/Zoom.o: Zoom.hh
+obj/FractalCreator.o: FractalCreator.hh

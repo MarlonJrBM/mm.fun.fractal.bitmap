@@ -4,7 +4,9 @@
 #include <memory>
 
 #include "Bitmap.hh"
+#include "FractalCreator.hh"
 #include "Mandelbrot.hh"
+#include "Zoom.hh"
 
 constexpr size_t Width = 800;
 constexpr size_t Height = 600;
@@ -17,13 +19,17 @@ int main() {
   double min = Initial_Min;
   double max = Initial_Max;
 
+  BM::ZoomList zoom_list{Width, Height};
+
+  zoom_list.add(BM::Zoom{Width / 2, Height / 2, 2.0 / Height});
+  zoom_list.add(BM::Zoom{500, Height - 102, 0.1});
+
   std::unique_ptr<int[]> histogram(std::make_unique<int[]>(BM::Mandelbrot::MaxIterations));
   std::unique_ptr<int[]> fractal(std::make_unique<int[]>(Width * Height));
 
   for (size_t ii = 0; ii < Height; ++ii) {
     for (size_t jj = 0; jj < Width; ++jj) {
-      double x_fractal{(ii - Height / 2. - 140) * 2. / Height};
-      double y_fractal{(jj - Width / 2.) * 2. / Height};
+      auto [x_fractal, y_fractal] = zoom_list.doZoom(ii, jj);
 
       int iterations = BM::Mandelbrot::getIterations(x_fractal, y_fractal);
       fractal[(ii * Width) + jj] = iterations;
@@ -47,7 +53,7 @@ int main() {
       uint8_t green{0};
       uint8_t blue{0};
       double hue{0};
-      
+
       if (iterations != BM::Mandelbrot::MaxIterations) {
         for (int ii = 0; ii < iterations; ++ii) {
           hue += double(histogram[ii]) / total;
