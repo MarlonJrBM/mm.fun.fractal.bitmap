@@ -48,6 +48,4 @@ class Bitmap {
   static constexpr size_t ColorCount{3};
 };
 
-
-
 }  // namespace BM

@@ -11,15 +11,15 @@ Bitmap::Bitmap(int width_, int height_)
 Bitmap::~Bitmap() {}
 
 void Bitmap::setPixel(int x_, int y_, uint8_t red_, uint8_t green_, uint8_t blue_) {
-   uint8_t* pixel = _pixels.get();
+  uint8_t* pixel = _pixels.get();
 
-   pixel +=  (_width*x_*3) + (y_*3);
+  pixel += (_width * x_ * 3) + (y_ * 3);
 
-   pixel[0] = blue_;
-   pixel[1] = green_;
-   pixel[2] = red_;
- 
-   return;
+  pixel[0] = blue_;
+  pixel[1] = green_;
+  pixel[2] = red_;
+
+  return;
 }
 
 bool Bitmap::write(const std::string& filename_) {

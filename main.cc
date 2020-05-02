@@ -14,6 +14,14 @@ constexpr int Height = 600;
 int main() {
   BM::FractalCreator fractal_creator(Width, Height);
 
+  fractal_creator.addRange(0.0, BM::RGB{0, 0, 0});
+  fractal_creator.addRange(0.3, BM::RGB{255, 0, 0});
+  fractal_creator.addRange(0.5, BM::RGB{255, 255, 0});
+  fractal_creator.addRange(10, BM::RGB{255, 255, 255});
+
+  fractal_creator.addZoom(BM::Zoom{146, 202, 0.1});
+  fractal_creator.addZoom(BM::Zoom{175, 330, 0.1});
+
   fractal_creator.drawFractal();
 
   if (!fractal_creator.writeBitmap("test.bmp")) {
