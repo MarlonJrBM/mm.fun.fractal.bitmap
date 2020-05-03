@@ -1,7 +1,7 @@
 #include "FractalCreator.hh"
 
-#include <iostream>
 #include <cassert>
+#include <iostream>
 
 #include "Mandelbrot.hh"
 
@@ -45,28 +45,33 @@ void FractalCreator::drawFractal() {
   calculateIterations();
   calculateTotalIterations();
   calculateRangeTotals();
-
-  RGB start_color{0, 0, 0};
-  RGB end_color{0, 0, 255};
-  RGB color_diff = end_color - start_color;
-
   for (int ii = 0; ii < _height; ++ii) {
     for (int jj = 0; jj < _width; ++jj) {
       const int iterations = _fractal[(ii * _width) + jj];
 
+      int range = getRange(iterations);
+      int range_total = _range_totals[range];
+      int range_start = _ranges[range];
+
+      const RGB& start_color = _colors[range];
+      const RGB& end_color = _colors[range + 1];
+      RGB color_diff = end_color - start_color;
+
       uint8_t red{0};
       uint8_t green{0};
       uint8_t blue{0};
-      double hue{0};
 
       if (iterations != BM::Mandelbrot::MaxIterations) {
-        for (int ii = 0; ii < iterations; ++ii) {
-          hue += double(_histogram[ii]) / _total_iterations;
+
+        int total_pixels = 0;
+
+        for (int ii = range_start; ii < iterations; ++ii) {
+          total_pixels += _histogram[ii];
         }
 
-        red = start_color.red + color_diff.red * hue;
-        green = start_color.green + color_diff.green * hue;
-        blue = start_color.blue + color_diff.blue * hue;
+        red = start_color.red + color_diff.red * double(total_pixels)/range_total;
+        green = start_color.green + color_diff.green * double(total_pixels)/range_total;
+        blue = start_color.blue + color_diff.blue * double(total_pixels)/range_total;
       }
 
       _bitmap.setPixel(ii, jj, red, green, blue);
@@ -89,19 +94,15 @@ void FractalCreator::addRange(double range_end_, const RGB& rgb_) {
 int FractalCreator::getRange(int iterations) const {
   int range = 0;
 
-  for (int ii=1; ii < _ranges.size(); ++ii) {
+  for (size_t ii = 1; ii < _ranges.size(); ++ii) {
     range = ii;
 
     if (_ranges[ii] > iterations) {
       break;
     }
-
   }
 
   --range;
-
-  assert(range > -1);
-  assert(range < _ranges.size());
 
   return range;
 }

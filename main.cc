@@ -19,8 +19,8 @@ int main() {
   fractal_creator.addRange(0.5, BM::RGB{255, 255, 0});
   fractal_creator.addRange(10, BM::RGB{255, 255, 255});
 
-  fractal_creator.addZoom(BM::Zoom{146, 202, 0.1});
-  fractal_creator.addZoom(BM::Zoom{175, 330, 0.1});
+  // fractal_creator.addZoom(BM::Zoom{146, 202, 0.1});
+  // fractal_creator.addZoom(BM::Zoom{175, 330, 0.1});
 
   fractal_creator.drawFractal();
 
